@@ -1,4 +1,4 @@
-function [ ahisteq ] = myAHE( image, k)
+imshowfunction [ ahisteq ] = myAHE( image, k)
 
 [M, N, C] = size(image);
 

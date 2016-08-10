@@ -10,6 +10,5 @@ interpolated = zeros(3*M-2, 2*N-1, C);
 interpolated(:,1:2:end,:) = interpolated_cols(:,:,:);
 interpolated(:,2:2:end,:) = interpolated_cols(:,1:end-1,:)/2 + interpolated_cols(:,2:end,:)/2;
 
-imshow(uint8(interpolated));
 end
 
