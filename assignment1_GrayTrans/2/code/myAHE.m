@@ -1,4 +1,4 @@
-imshowfunction [ ahisteq ] = myAHE( image, k)
+function [ ahisteq ] = myAHE( image, k)
 
 [M, N, C] = size(image);
 
@@ -15,7 +15,7 @@ for h = 1:C
         hist_i = hist_i + hist_last - hist_first;
 
         T = getTfromHist(hist_i);
-        ahisteq(i,k/2) = T(image(i,k/2,h)+1);
+        ahisteq(i,k/2,h) = T(image(i,k/2,h)+1);
 
         hist_i_j = hist_i;
         for j = (k/2+1):(N-k/2)
@@ -24,7 +24,7 @@ for h = 1:C
             hist_i_j = hist_i_j - hist_first - hist_last;
 
             T = getTfromHist(hist_i_j);
-            ahisteq(i,j) = T(image(i,j)+1);
+            ahisteq(i,j,h) = T(image(i,j,h)+1);
         end
     end
 end

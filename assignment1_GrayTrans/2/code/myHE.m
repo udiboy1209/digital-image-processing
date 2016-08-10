@@ -1,4 +1,4 @@
-function [ histeq ] = myHE( image )
+function [histeq] = myHE(image)
 
 [M, N, C] = size(image);
 
