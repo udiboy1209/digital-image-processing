@@ -32,7 +32,11 @@ for h = 1:C
             ahisteq(i,j,h) = T(image(i,j,h)+1);
             
             if i == k/2+1
-                ahisteq(1:k/2,j,h) = T(image(1:k/2,j,h)+1);
+                if j == N-k/2
+                    ahisteq(1:k/2,N-k/2:N,h) = T(image(1:k/2,N-k/2:N,h)+1);
+                else
+                    ahisteq(1:k/2,j,h) = T(image(1:k/2,j,h)+1);
+                end
             elseif i == M-k/2
                 ahisteq(M-k/2+1:M,j,h) = T(image(M-k/2+1:M,j,h)+1);
             end
