@@ -1,0 +1,200 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>myMainScript</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-08-11"><meta name="DC.source" content="myMainScript.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">MyMainScript</a></li><li><a href="#2">myLinearContrastStretching</a></li><li><a href="#3">myHE</a></li><li><a href="#4">myAHE</a></li><li><a href="#5">myCLAHE</a></li></ul></div><h2>MyMainScript<a name="1"></a></h2><pre class="codeinput">tic;
+
+image1 = imread(<span class="string">'../data/barbara.png'</span>);
+image2 = imread(<span class="string">'../data/TEM.png'</span>);
+image3 = imread(<span class="string">'../data/canyon.png'</span>);
+
+figure,imshow(image1),colorbar;
+figure,imshow(image2),colorbar;
+figure,imshow(image3);
+</pre><img vspace="5" hspace="5" src="myMainScript_01.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_02.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_03.png" alt=""> <h2>myLinearContrastStretching<a name="2"></a></h2><pre class="codeinput">image1_1=uint8(myLinearContrastStretching(image1));
+image2_1=uint8(myLinearContrastStretching(image2));
+image3_1=uint8(myLinearContrastStretching(image3));
+
+imwrite(image1_1,<span class="string">'../images/barbaraLinearContrastStretching.png'</span>);
+imwrite(image2_1,<span class="string">'../images/TEMLinearContrastStretching.png'</span>);
+imwrite(image3_1,<span class="string">'../images/canyonLinearContrastStretching.png'</span>);
+
+figure,imshow(image1_1),colorbar;
+figure,imshow(image2_1),colorbar;
+figure,imshow(image3_1);
+</pre><img vspace="5" hspace="5" src="myMainScript_04.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_05.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_06.png" alt=""> <h2>myHE<a name="3"></a></h2><pre class="codeinput">image1_2=uint8(myHE(image1));
+image2_2=uint8(myHE(image2));
+image3_2=uint8(myHE(image3));
+
+imwrite(image1_2,<span class="string">'../images/barbaraHE.png'</span>);
+imwrite(image2_2,<span class="string">'../images/TEMHE.png'</span>);
+imwrite(image3_2,<span class="string">'../images/canyonHE.png'</span>);
+
+figure,imshow(image1_2);
+figure,imshow(image2_2);
+figure,imshow(image3_2);
+</pre><img vspace="5" hspace="5" src="myMainScript_07.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_08.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_09.png" alt=""> <h2>myAHE<a name="4"></a></h2><pre class="codeinput">image1_3=uint8(myAHE(image1,40));
+image2_3=uint8(myAHE(image2,40));
+image3_3=uint8(myAHE(image3,40));
+
+imwrite(image1_3,<span class="string">'../images/barbaraAHE.png'</span>);
+imwrite(image2_3,<span class="string">'../images/TEMAHE.png'</span>);
+imwrite(image3_3,<span class="string">'../images/canyonAHE.png'</span>);
+
+figure,imshow(image1_3);
+figure,imshow(image2_3);
+figure,imshow(image3_3);
+</pre><img vspace="5" hspace="5" src="myMainScript_10.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_11.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_12.png" alt=""> <h2>myCLAHE<a name="5"></a></h2><pre class="codeinput">image1_4=uint8(myCLAHE(image1,40,0.004));
+image2_4=uint8(myCLAHE(image2,40,0.004));
+image3_4=uint8(myCLAHE(image3,40,0.004));
+
+imwrite(image1_4,<span class="string">'../images/barbaraCLAHE.png'</span>);
+imwrite(image2_4,<span class="string">'../images/TEMCLAHE.png'</span>);
+imwrite(image3_4,<span class="string">'../images/canyonCLAHE.png'</span>);
+
+figure,imshow(image1_4);
+figure,imshow(image2_4);
+figure,imshow(image3_4);
+
+toc;
+</pre><pre class="codeoutput">Elapsed time is 631.762812 seconds.
+</pre><img vspace="5" hspace="5" src="myMainScript_13.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_14.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_15.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% MyMainScript
+
+tic;
+
+image1 = imread('../data/barbara.png');
+image2 = imread('../data/TEM.png');
+image3 = imread('../data/canyon.png');
+
+figure,imshow(image1),colorbar;
+figure,imshow(image2),colorbar;
+figure,imshow(image3);
+
+%% myLinearContrastStretching
+
+image1_1=uint8(myLinearContrastStretching(image1));
+image2_1=uint8(myLinearContrastStretching(image2));
+image3_1=uint8(myLinearContrastStretching(image3));
+
+imwrite(image1_1,'../images/barbaraLinearContrastStretching.png');
+imwrite(image2_1,'../images/TEMLinearContrastStretching.png');
+imwrite(image3_1,'../images/canyonLinearContrastStretching.png');
+
+figure,imshow(image1_1),colorbar;
+figure,imshow(image2_1),colorbar;
+figure,imshow(image3_1);
+
+
+%% myHE
+
+image1_2=uint8(myHE(image1));
+image2_2=uint8(myHE(image2));
+image3_2=uint8(myHE(image3));
+
+imwrite(image1_2,'../images/barbaraHE.png');
+imwrite(image2_2,'../images/TEMHE.png');
+imwrite(image3_2,'../images/canyonHE.png');
+
+figure,imshow(image1_2);
+figure,imshow(image2_2);
+figure,imshow(image3_2);
+
+
+%% myAHE
+
+image1_3=uint8(myAHE(image1,40));
+image2_3=uint8(myAHE(image2,40));
+image3_3=uint8(myAHE(image3,40));
+
+imwrite(image1_3,'../images/barbaraAHE.png');
+imwrite(image2_3,'../images/TEMAHE.png');
+imwrite(image3_3,'../images/canyonAHE.png');
+
+figure,imshow(image1_3);
+figure,imshow(image2_3);
+figure,imshow(image3_3);
+
+%% myCLAHE
+
+image1_4=uint8(myCLAHE(image1,40,0.004));
+image2_4=uint8(myCLAHE(image2,40,0.004));
+image3_4=uint8(myCLAHE(image3,40,0.004));
+
+imwrite(image1_4,'../images/barbaraCLAHE.png');
+imwrite(image2_4,'../images/TEMCLAHE.png');
+imwrite(image3_4,'../images/canyonCLAHE.png');
+
+figure,imshow(image1_4);
+figure,imshow(image2_4);
+figure,imshow(image3_4);
+
+toc;
+
+##### SOURCE END #####
+--></body></html>

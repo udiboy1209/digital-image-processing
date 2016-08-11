@@ -44,7 +44,7 @@ figure,imshow(image3_2);
 
 image1_3=uint8(myAHE(image1,40));
 image2_3=uint8(myAHE(image2,40));
-image3_3=uint8(myAHE(image3,30));
+image3_3=uint8(myAHE(image3,40));
 
 imwrite(image1_3,'../images/barbaraAHE.png');
 imwrite(image2_3,'../images/TEMAHE.png');
@@ -56,9 +56,9 @@ figure,imshow(image3_3);
 
 %% myCLAHE
 
-image1_4=uint8(myCLAHE(image1,40,1000));
-image2_4=uint8(myCLAHE(image2,40,1000));
-image3_4=uint8(myCLAHE(image3,30,1000));
+image1_4=uint8(myCLAHE(image1,40,0.004));
+image2_4=uint8(myCLAHE(image2,40,0.004));
+image3_4=uint8(myCLAHE(image3,40,0.004));
 
 imwrite(image1_4,'../images/barbaraCLAHE.png');
 imwrite(image2_4,'../images/TEMCLAHE.png');
