@@ -25,8 +25,8 @@ image3 = imread('../data/canyon.png');
 
 %% myAHE
 %figure,imshow(uint8(myAHE(image1,40)));
-%figure,imshow(uint8(myAHE(image2,50)));
-figure,imshow(uint8(myAHE(image3,30)));
+figure,imshow(uint8(myAHE(image2,50)));
+%figure,imshow(uint8(myAHE(image3,30)));
 
 
 toc;

@@ -5,6 +5,8 @@ function [ ahisteq ] = myAHE( image, k)
 ahisteq = zeros(M,N,C);
 
 for h = 1:C
+    
+    for i = 
     [hist_i, ~] = imhist(image(1:k,1:k,h));
     T = getTfromHist(hist_i);
     ahisteq(1:k/2,1:k/2,h) = T(image(1:k/2,1:k/2,h)+1);
@@ -26,7 +28,7 @@ for h = 1:C
         for j = (k/2+1):(N-k/2)
             [hist_first, ~] = imhist(image(i-k/2:i+k/2,j-k/2,h));
             [hist_last, ~] = imhist(image(i-k/2:i+k/2,j+k/2,h));
-            hist_i_j = hist_i_j - hist_first + hist_last;
+            hist_i_j = hist_i_j - hist_first - hist_last;
 
             T = getTfromHist(hist_i_j);
             ahisteq(i,j,h) = T(image(i,j,h)+1);
