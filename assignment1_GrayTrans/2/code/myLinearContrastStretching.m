@@ -1,11 +1,16 @@
 function [ contrast ] = myLinearContrastStretching( image )
+[M,N,C]=size(image);
+contrast=zeros(size(image));
 
-maxp = max(max(image));
-minp = min(min(image));
+for h=1:C
 
-sub = uint8(ones(size(image)));
-image = image - sub*minp;
+    maxp = max(max(image(:,:,h)));
+    minp = min(min(image(:,:,h)));
 
-f = 255/(maxp - minp);
-contrast = image.*f;
+    sub = uint8(ones(M,N));
+    image(:,:,h) = image(:,:,h) - sub*minp;
 
+    f = 255/(maxp - minp);
+    contrast(:,:,h) = image(:,:,h).*f;
+
+end

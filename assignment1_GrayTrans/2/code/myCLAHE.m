@@ -26,7 +26,7 @@ for h = 1:C
         for j = (k/2+1):(N-k/2)
             [hist_first, ~] = imhist(image(i-k/2:i+k/2,j-k/2,h));
             [hist_last, ~] = imhist(image(i-k/2:i+k/2,j+k/2,h));
-            hist_i_j = hist_i_j - hist_first - hist_last;
+            hist_i_j = hist_i_j - hist_first + hist_last;
 
             T = getTfromHistCL(hist_i_j,thresh);
             clahe(i,j,h) = T(image(i,j,h)+1);
