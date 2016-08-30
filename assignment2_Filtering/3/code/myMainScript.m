@@ -15,7 +15,7 @@ m = min(min(corrupted));
 M = max(max(corrupted));
 corrupted = corrupted/(M-m);
 
-patchFiltered1 = myPatchBasedFiltering(corrupted, 5, 5, 3);
+patchFiltered1 = myPatchBasedFiltering(corrupted, 0.25, 25, 9);
 
 figure,imshow(barbara);
 figure,imshow(patchFiltered1);
