@@ -5,6 +5,7 @@ w = floor(sigma_s*3); % window size = 6 sigma_s
 
 % Gaussian weights for space
 Gs = fspecial('gaussian', [2*w+1, 2*w+1], sigma_s);
+figure,imshow(Gs);
 
 img = padarray(img, [w w], inf);
 output = zeros([M,N]);
