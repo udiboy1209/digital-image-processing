@@ -11,9 +11,11 @@ h = fspecial('gaussian', [2*w+1, 2*w+1], sigma);
 Ix = imfilter(img, dx);
 Iy = imfilter(img, dy);
 
-%figure,imshow(img);
-%figure,imshow(rescale(Ix));
-%figure,imshow(rescale(Iy));
+
+figure,imshow(rescale(Ix));
+title('Y Derivative');
+figure,imshow(rescale(Iy));
+title('X Derivative');
 
 eigenvals = zeros([M N 2]);
 C = zeros([M N]);
@@ -30,10 +32,12 @@ for i = 1:M
     end
 end
 
-%figure, imshow(rescale(eigenvals(:,:,1)));
-%figure, imshow(rescale(eigenvals(:,:,2)));
-figure, imshow(C);
-
+figure, imshow(rescale(eigenvals(:,:,1))),colormap(parula(200)),colorbar;
+title('Eigenvalue 1');
+figure, imshow(rescale(eigenvals(:,:,2))),colormap(parula(200)),colorbar;
+title('Eigenvalue 2');
+figure, imshow(C),colormap(parula(200)),colorbar;
+title('Cornerness measure');
 output = C;
 end
 

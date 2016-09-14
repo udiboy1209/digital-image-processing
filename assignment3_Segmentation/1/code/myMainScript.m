@@ -6,7 +6,6 @@ load('../data/boat.mat');
 boat = rescale(imageOrig);
 
 figure, imshow(boat);
+title('Original');
 myHarrisCornerDetector(boat, 10, 1, 0.15);
-myHarrisCornerDetector(boat, 10, 2, 0.15);
-myHarrisCornerDetector(boat, 10, 3, 0.15);
 toc;
