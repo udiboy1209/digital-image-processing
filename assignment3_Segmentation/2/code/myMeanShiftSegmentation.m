@@ -1,25 +1,21 @@
 function [ output ] = myMeanShiftSegmentation(img, bandwidth)
-[M, N, C] = size(img);
-
-pixels = reshape(img, M*N, C);
+[numPx, C] = size(img);
 
 bandSq = bandwidth^2;
-numPx = M*N;
 
 numLeft = numPx;
-updated = pixels;
+updated = img;
 output = zeros(numPx,C);
 converged = zeros(numLeft,1,'uint8');
 shiftThres = bandwidth*1e-3;
 
 while numLeft
-    tic;
     for i = 1:numPx
         if converged(i) == 0
             px = updated(i,:);
-            dist = sum((pixels - repmat(px, numPx, 1)).^2, 2);
+            dist = sum((img - repmat(px, numPx, 1)).^2, 2);
 
-            nearest = pixels(dist < bandSq,:);
+            nearest = img(dist < bandSq,:);
             newpx = sum(nearest,1)./size(nearest,1);
 
             if sum((newpx - px).^2) < shiftThres
@@ -34,7 +30,4 @@ while numLeft
         end
     end
     disp(numLeft);
-    toc;
 end
-
-output = reshape(output,M,N,C);
