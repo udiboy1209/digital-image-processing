@@ -21,7 +21,7 @@ baboonSmall = reshape(baboonSmall, M*N/4,C);
 intOut = myMeanShiftSegmentation(baboonSmall, 30.0/255);
 intOutImg = reshape(intOut, M/2, N/2, C);
 
-figure, show(intOutImg);
+figure, imshow(intOutImg);
 
 xyOut = myMeanShiftSegmentation(xyPlot, 25.5/255);
 xyOutImg = reshape(xyOut(:,3),M/2,N/2);
